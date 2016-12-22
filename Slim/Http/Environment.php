@@ -27,7 +27,7 @@ class Environment extends Collection implements EnvironmentInterface
      *
      * @return self
      */
-    public static function mock(array $userData = [])
+    public static function mock(array $userData = []) : self
     {
         $data = array_merge([
             'SERVER_PROTOCOL'      => 'HTTP/1.1',

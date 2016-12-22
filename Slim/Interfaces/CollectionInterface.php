@@ -16,15 +16,15 @@ namespace Slim\Interfaces;
  */
 interface CollectionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 {
-    public function set($key, $value);
+    public function set(string $key, $value);
 
-    public function get($key, $default = null);
+    public function get(string $key, $default = null);
 
     public function replace(array $items);
 
     public function all();
 
-    public function has($key);
+    public function has($key) : bool;
 
     public function remove($key);
 

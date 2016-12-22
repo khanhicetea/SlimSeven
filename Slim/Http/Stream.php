@@ -129,7 +129,7 @@ class Stream implements StreamInterface
      *
      * @return bool
      */
-    protected function isAttached()
+    protected function isAttached() : bool
     {
         return is_resource($this->stream);
     }
@@ -191,7 +191,7 @@ class Stream implements StreamInterface
      * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         if (!$this->isAttached()) {
             return '';

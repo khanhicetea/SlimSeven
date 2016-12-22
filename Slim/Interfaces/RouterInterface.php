@@ -29,7 +29,7 @@ interface RouterInterface
      *
      * @return RouteInterface
      */
-    public function map($methods, $pattern, $handler);
+    public function map(array $methods, string $pattern, callable $handler);
 
     /**
      * Dispatch router for HTTP request
@@ -40,7 +40,7 @@ interface RouterInterface
      *
      * @link   https://github.com/nikic/FastRoute/blob/master/src/Dispatcher.php
      */
-    public function dispatch(ServerRequestInterface $request);
+    public function dispatch(ServerRequestInterface $request) : array;
 
     /**
      * Add a route group to the array
@@ -50,14 +50,14 @@ interface RouterInterface
      *
      * @return RouteGroupInterface
      */
-    public function pushGroup($pattern, $callable);
+    public function pushGroup(string $pattern, callable $callable) : RouteGroupInterface;
 
     /**
      * Removes the last route group from the array
      *
      * @return bool True if successful, else False
      */
-    public function popGroup();
+    public function popGroup() : bool;
 
     /**
      * Get named route object
@@ -68,14 +68,14 @@ interface RouterInterface
      *
      * @throws RuntimeException   If named route does not exist
      */
-    public function getNamedRoute($name);
+    public function getNamedRoute(string $name) : RouteInterface;
 
     /**
      * @param $identifier
      *
      * @return \Slim\Interfaces\RouteInterface
      */
-    public function lookupRoute($identifier);
+    public function lookupRoute($identifier) : RouteInterface;
 
     /**
      * Build the path for a named route excluding the base path
@@ -89,7 +89,7 @@ interface RouterInterface
      * @throws RuntimeException         If named route does not exist
      * @throws InvalidArgumentException If required data not provided
      */
-    public function relativePathFor($name, array $data = [], array $queryParams = []);
+    public function relativePathFor(string $name, array $data = [], array $queryParams = []) : string;
 
     /**
      * Build the path for a named route including the base path
@@ -103,5 +103,5 @@ interface RouterInterface
      * @throws RuntimeException         If named route does not exist
      * @throws InvalidArgumentException If required data not provided
      */
-    public function pathFor($name, array $data = [], array $queryParams = []);
+    public function pathFor(string $name, array $data = [], array $queryParams = []) : string;
 }

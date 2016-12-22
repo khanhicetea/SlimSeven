@@ -23,7 +23,7 @@ interface RouteGroupInterface
      *
      * @return string
      */
-    public function getPattern();
+    public function getPattern() : string;
 
     /**
      * Prepend middleware to the group middleware collection
@@ -32,7 +32,7 @@ interface RouteGroupInterface
      *
      * @return RouteGroupInterface
      */
-    public function add($callable);
+    public function add($callable) : RouteGroupInterface;
 
     /**
      * Execute route group callable in the context of the Slim App

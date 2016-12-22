@@ -60,7 +60,7 @@ abstract class Message implements MessageInterface
     /**
      * Disable magic setter to ensure immutability
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         // Do nothing
     }
@@ -76,7 +76,7 @@ abstract class Message implements MessageInterface
      *
      * @return string HTTP protocol version.
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion() : string
     {
         return $this->protocolVersion;
     }
@@ -95,7 +95,7 @@ abstract class Message implements MessageInterface
      * @return static
      * @throws InvalidArgumentException if the http version is an invalid number
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version) : self
     {
         if (!isset(self::$validProtocolVersions[$version])) {
             throw new InvalidArgumentException(
@@ -138,7 +138,7 @@ abstract class Message implements MessageInterface
      *     key MUST be a header name, and each value MUST be an array of strings
      *     for that header.
      */
-    public function getHeaders()
+    public function getHeaders() : array
     {
         return $this->headers->all();
     }
@@ -151,7 +151,7 @@ abstract class Message implements MessageInterface
      *     name using a case-insensitive string comparison. Returns false if
      *     no matching header name is found in the message.
      */
-    public function hasHeader($name)
+    public function hasHeader(string $name) : bool
     {
         return $this->headers->has($name);
     }
@@ -170,7 +170,7 @@ abstract class Message implements MessageInterface
      *    header. If the header does not appear in the message, this method MUST
      *    return an empty array.
      */
-    public function getHeader($name)
+    public function getHeader(string $name) : array
     {
         return $this->headers->get($name, []);
     }
@@ -194,7 +194,7 @@ abstract class Message implements MessageInterface
      *    concatenated together using a comma. If the header does not appear in
      *    the message, this method MUST return an empty string.
      */
-    public function getHeaderLine($name)
+    public function getHeaderLine(string $name) : string
     {
         return implode(',', $this->headers->get($name, []));
     }
@@ -214,7 +214,7 @@ abstract class Message implements MessageInterface
      * @return static
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    public function withHeader($name, $value)
+    public function withHeader(string $name, $value) : self
     {
         $clone = clone $this;
         $clone->headers->set($name, $value);
@@ -238,7 +238,7 @@ abstract class Message implements MessageInterface
      * @return static
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader(string $name, $value) : self
     {
         $clone = clone $this;
         $clone->headers->add($name, $value);
@@ -258,7 +258,7 @@ abstract class Message implements MessageInterface
      * @param string $name Case-insensitive header field name to remove.
      * @return static
      */
-    public function withoutHeader($name)
+    public function withoutHeader(string $name) : self
     {
         $clone = clone $this;
         $clone->headers->remove($name);
@@ -275,7 +275,7 @@ abstract class Message implements MessageInterface
      *
      * @return StreamInterface Returns the body as a stream.
      */
-    public function getBody()
+    public function getBody() : StreamInterface
     {
         return $this->body;
     }
@@ -293,7 +293,7 @@ abstract class Message implements MessageInterface
      * @return static
      * @throws \InvalidArgumentException When the body is not valid.
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body) : self
     {
         // TODO: Test for invalid body?
         $clone = clone $this;

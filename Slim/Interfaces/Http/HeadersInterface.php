@@ -18,7 +18,7 @@ use Slim\Interfaces\CollectionInterface;
  */
 interface HeadersInterface extends CollectionInterface
 {
-    public function add($key, $value);
+    public function add(string $key, $value);
 
-    public function normalizeKey($key);
+    public function normalizeKey(string $key) : string;
 }

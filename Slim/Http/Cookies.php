@@ -73,7 +73,7 @@ class Cookies implements CookiesInterface
      *
      * @return mixed Cookie value if present, else default
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         return isset($this->requestCookies[$name]) ? $this->requestCookies[$name] : $default;
     }
@@ -84,7 +84,7 @@ class Cookies implements CookiesInterface
      * @param string       $name  Cookie name
      * @param string|array $value Cookie value, or cookie properties
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         if (!is_array($value)) {
             $value = ['value' => (string)$value];
@@ -97,7 +97,7 @@ class Cookies implements CookiesInterface
      *
      * @return string[]
      */
-    public function toHeaders()
+    public function toHeaders() : array
     {
         $headers = [];
         foreach ($this->responseCookies as $name => $properties) {
@@ -115,7 +115,7 @@ class Cookies implements CookiesInterface
      *
      * @return string
      */
-    protected function toHeader($name, array $properties)
+    protected function toHeader(string $name, array $properties) : string
     {
         $result = urlencode($name) . '=' . urlencode($properties['value']);
 
@@ -163,7 +163,7 @@ class Cookies implements CookiesInterface
      *
      * @throws InvalidArgumentException if the cookie data cannot be parsed
      */
-    public static function parseHeader($header)
+    public static function parseHeader(string $header) : array
     {
         if (is_array($header) === true) {
             $header = isset($header[0]) ? $header[0] : '';

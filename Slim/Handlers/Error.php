@@ -31,7 +31,7 @@ class Error extends AbstractError
      * @return ResponseInterface
      * @throws UnexpectedValueException
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, \Exception $exception)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, \Exception $exception) : ResponseInterface
     {
         $contentType = $this->determineContentType($request);
         switch ($contentType) {
@@ -70,7 +70,7 @@ class Error extends AbstractError
      *
      * @return string
      */
-    protected function renderHtmlErrorMessage(\Exception $exception)
+    protected function renderHtmlErrorMessage(\Exception $exception) : string
     {
         $title = 'Slim Application Error';
 
@@ -107,7 +107,7 @@ class Error extends AbstractError
      *
      * @return string
      */
-    protected function renderHtmlException(\Exception $exception)
+    protected function renderHtmlException(\Exception $exception) : string
     {
         $html = sprintf('<div><strong>Type:</strong> %s</div>', get_class($exception));
 
@@ -142,7 +142,7 @@ class Error extends AbstractError
      *
      * @return string
      */
-    protected function renderJsonErrorMessage(\Exception $exception)
+    protected function renderJsonErrorMessage(\Exception $exception) : string
     {
         $error = [
             'message' => 'Slim Application Error',
@@ -173,7 +173,7 @@ class Error extends AbstractError
      *
      * @return string
      */
-    protected function renderXmlErrorMessage(\Exception $exception)
+    protected function renderXmlErrorMessage(\Exception $exception) : string
     {
         $xml = "<error>\n  <message>Slim Application Error</message>\n";
         if ($this->displayErrorDetails) {
@@ -199,7 +199,7 @@ class Error extends AbstractError
      * @param  string $content
      * @return string
      */
-    private function createCdataSection($content)
+    private function createCdataSection(string $content) : string
     {
         return sprintf('<![CDATA[%s]]>', str_replace(']]>', ']]]]><![CDATA[>', $content));
     }

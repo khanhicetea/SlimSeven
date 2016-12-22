@@ -52,7 +52,7 @@ class SlimException extends Exception
      *
      * @return ServerRequestInterface
      */
-    public function getRequest()
+    public function getRequest() : ServerRequestInterface
     {
         return $this->request;
     }
@@ -62,7 +62,7 @@ class SlimException extends Exception
      *
      * @return ResponseInterface
      */
-    public function getResponse()
+    public function getResponse() : ResponseInterface
     {
         return $this->response;
     }

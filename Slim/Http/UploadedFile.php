@@ -99,7 +99,7 @@ class UploadedFile implements UploadedFileInterface
      *
      * @return array A normalized tree of UploadedFile instances.
      */
-    private static function parseUploadedFiles(array $uploadedFiles)
+    private static function parseUploadedFiles(array $uploadedFiles) : array
     {
         $parsed = [];
         foreach ($uploadedFiles as $field => $uploadedFile) {
@@ -148,7 +148,7 @@ class UploadedFile implements UploadedFileInterface
      * @param int         $error The UPLOAD_ERR_XXX code representing the status of the upload.
      * @param bool        $sapi Indicates if the upload is in a SAPI environment.
      */
-    public function __construct($file, $name = null, $type = null, $size = null, $error = UPLOAD_ERR_OK, $sapi = false)
+    public function __construct(string $file, $name = null, $type = null, $size = null, int $error = UPLOAD_ERR_OK, bool $sapi = false)
     {
         $this->file = $file;
         $this->name = $name;
@@ -174,7 +174,7 @@ class UploadedFile implements UploadedFileInterface
      * @throws \RuntimeException in cases when no stream is available or can be
      *     created.
      */
-    public function getStream()
+    public function getStream() : StreamInterface
     {
         if ($this->moved) {
             throw new \RuntimeException(sprintf('Uploaded file %1s has already been moved', $this->name));
@@ -220,7 +220,7 @@ class UploadedFile implements UploadedFileInterface
      * @throws RuntimeException on any error during the move operation, or on
      *     the second or subsequent call to the method.
      */
-    public function moveTo($targetPath)
+    public function moveTo(string $targetPath)
     {
         if ($this->moved) {
             throw new RuntimeException('Uploaded file already moved');
@@ -270,7 +270,7 @@ class UploadedFile implements UploadedFileInterface
      *
      * @return int One of PHP's UPLOAD_ERR_XXX constants.
      */
-    public function getError()
+    public function getError() : int
     {
         return $this->error;
     }

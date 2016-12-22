@@ -23,9 +23,9 @@ abstract class AbstractError extends AbstractHandler
      *
      * @param bool $displayErrorDetails Set to true to display full details
      */
-    public function __construct($displayErrorDetails = false)
+    public function __construct(bool $displayErrorDetails = false)
     {
-        $this->displayErrorDetails = (bool) $displayErrorDetails;
+        $this->displayErrorDetails = $displayErrorDetails;
     }
 
     /**
@@ -35,7 +35,7 @@ abstract class AbstractError extends AbstractHandler
      *
      * @return void
      */
-    protected function writeToErrorLog($throwable)
+    protected function writeToErrorLog(\Throwable $throwable)
     {
         if ($this->displayErrorDetails) {
             return;
@@ -60,7 +60,7 @@ abstract class AbstractError extends AbstractHandler
      *
      * @return string
      */
-    protected function renderThrowableAsText($throwable)
+    protected function renderThrowableAsText(\Throwable $throwable) : string
     {
         $text = sprintf('Type: %s' . PHP_EOL, get_class($throwable));
 

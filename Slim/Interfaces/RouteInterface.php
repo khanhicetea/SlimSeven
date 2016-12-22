@@ -29,14 +29,14 @@ interface RouteInterface
      *
      * @return mixed
      */
-    public function getArgument($name, $default = null);
+    public function getArgument(string $name, $default = null);
 
     /**
      * Get route arguments
      *
      * @return array
      */
-    public function getArguments();
+    public function getArguments() : array;
 
     /**
      * Get route name
@@ -50,7 +50,7 @@ interface RouteInterface
      *
      * @return string
      */
-    public function getPattern();
+    public function getPattern() : string;
 
     /**
      * Set a route argument
@@ -60,7 +60,7 @@ interface RouteInterface
      *
      * @return static
      */
-    public function setArgument($name, $value);
+    public function setArgument(string $name, $value) : self;
 
     /**
      * Replace route arguments
@@ -69,7 +69,7 @@ interface RouteInterface
      *
      * @return static
      */
-    public function setArguments(array $arguments);
+    public function setArguments(array $arguments) : self;
 
     /**
      * Set route name
@@ -79,7 +79,7 @@ interface RouteInterface
      * @return static
      * @throws InvalidArgumentException if the route name is not a string
      */
-    public function setName($name);
+    public function setName(string $name) : self;
 
     /**
      * Add middleware
@@ -90,7 +90,7 @@ interface RouteInterface
      *
      * @return RouteInterface
      */
-    public function add($callable);
+    public function add(callable $callable) : RouteInterface;
 
     /**
      * Prepare the route for use
@@ -111,7 +111,7 @@ interface RouteInterface
      * @param ResponseInterface $response
      * @return ResponseInterface
      */
-    public function run(ServerRequestInterface $request, ResponseInterface $response);
+    public function run(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
 
     /**
      * Dispatch route callable against current Request and Response objects
@@ -125,5 +125,5 @@ interface RouteInterface
      *
      * @return ResponseInterface
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response);
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response) : ResponseInterface;
 }
